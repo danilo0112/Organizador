@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.botão{
+			color:white;
+			padding: 10px;
+			background-color: black;
+			size: auto;
+			margin: 10px auto 10px auto;
+			text-align: center;
+			vertical-align:middle;
+			display:table-cell;
+		}
+		form.botão{
+			padding-top: 20px;
+		}
+		body{
+			color:white;
+			text-align: center;
+			background-color: black;
+		}
+		div.formulario{
+			display: block;
+			width: 300px;
+			height:120px;
+			padding: 10px
+			border:5px:;
+			background-color: white;
+			color:black;
+			text-align: center;
+			border-radius: 15px;
+			margin:10px auto 10px auto;
+			margin-right:10px;
+			float: right;
+		}
+		p{float:left;}
+		table, th, td {
+    		margin: 10px auto 10px auto;
+    		border: 2px solid black;
+    		background-color: white;
+    		color: black;
+    		border-spacing: 0;
+    		border-collapse: collapse;}
+	</style>
+
+</head>
+<body>
+	<p>
+		<form >
+			<input type="button" id = "botão"class="botão" value="criar novo evento" onclick="mostre()"><br/>
+		</form>
+		<br></br>
+		<p>test</p>
+
+		<div>
+			<table id="myTable">
+				<tr>
+					<th>Nome</th>
+					<th>Descrição</th>
+					<th>Data e hora</th>
+				</tr>
+			</table>
+		</div>
+
+		<div id = "novo_evento" class="formulario">
+		<form><b>Nome</b><input type="text" id="name"></form>
+		<form><b>Descrição</b><input type="text" id="descrição"></form>
+		<form><b>Data e Hora</b><input type="datetime-local" id="data"></form>
+		<form><input type="button" class = "botão" value="submeter" onclick= "adicionar_a_tabelag(eventos,x)"></form>
+		</div>
+	</p>
+</body>
+<script type="text/javascript">
+	var x = 1
+	var eventos =[0,]
+	function evento(x,eventos){
+		var name = document.getElementById("name").value
+		var descrição = document.getElementById("descrição").value
+		var data = document.getElementById("data").value
+
+		this.name = name
+		this.especificações = descrição
+		this.data = data
+	}
+	function criar_formulario(){
+		var div =document.getElementById("novo_evento")
+		var name=document.createTextNode("nome")
+			name.class = "negrito"
+			name.id = "name"
+		div.appendChild(name)
+	}
+	function mostrar(id){
+			document.getElementById(id).style.display = "block";
+	}
+	function mostre(){
+		mostrar('novo_evento')
+		esconder('botão')
+	}
+	function esconder(id){	
+			document.getElementById(id).style.display = "none";
+	}
+	function criação_de_evento(x,eventos){
+		var eventon = new evento(x,eventos)
+
+		esconder('novo_evento')
+		mostrar('botão')
+
+		eventos.push(eventon)
+
+		return(eventos);
+	}
+
+	esconder("novo_evento")
+	function adicionar_a_tabelag(eventos,x){
+		criação_de_evento(x,eventos)
+		window['x']= x + 1
+		var table = document.getElementById("myTable");
+		var numeroLinhas = table.rows.length;
+		var linha = table.insertRow(numeroLinhas);
+		var celula1 = linha.insertCell(0);
+		var celula2 = linha.insertCell(1);
+		var celula3 = linha.insertCell(2);
+		celula1.innerHTML = eventos[x].name;
+		celula2.innerHTML = eventos[x].especificações;
+		celula3.innerHTML = eventos[x].data;
+		
+		celula2.maxlength = 20
+		return(eventos,x)
+	}
+	//Teste das funções
+</script>
+</html>
